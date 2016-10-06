@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
             glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices1);
             glEnableVertexAttribArray(program.positionAttribute);
             
-
+            
             
             glBindTexture(GL_TEXTURE_2D, cheese);
             float texCoords1[] = {
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
             glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords1);
             glEnableVertexAttribArray(program.texCoordAttribute);
             glDrawArrays(GL_TRIANGLES, 0, 6);
-
+            
             
             glDisableVertexAttribArray(program.positionAttribute);
             glDisableVertexAttribArray(program.texCoordAttribute);
@@ -177,9 +177,9 @@ int main(int argc, char *argv[])
             
             glDisableVertexAttribArray(program.positionAttribute);
             glDisableVertexAttribArray(program.texCoordAttribute);
-
             
-
+            
+            
         }
         SDL_GL_SwapWindow(displayWindow);
     }

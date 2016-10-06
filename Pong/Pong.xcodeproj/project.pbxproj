@@ -1,0 +1,105 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		D7D6EE651DA4AFA9005B78AE /* emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji.png; sourceTree = "<group>"; };
+		D7D6EE661DA4AFA9005B78AE /* emoji2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji2.png; sourceTree = "<group>"; };
+		D7D6EE671DA4AFA9005B78AE /* emoji3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji3.png; sourceTree = "<group>"; };
+		D7D6EE681DA4AFA9005B78AE /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
+		D7D6EE691DA4AFA9005B78AE /* fragment_textured.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fragment_textured.glsl; sourceTree = "<group>"; };
+		D7D6EE6A1DA4AFA9005B78AE /* fragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		D7D6EE6B1DA4AFA9005B78AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D7D6EE6C1DA4AFA9005B78AE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D7D6EE6D1DA4AFA9005B78AE /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		D7D6EE6E1DA4AFA9005B78AE /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		D7D6EE6F1DA4AFA9005B78AE /* NYUCodebase-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NYUCodebase-Info.plist"; sourceTree = "<group>"; };
+		D7D6EE701DA4AFA9005B78AE /* Pong.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pong.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		D7D6EE501DA48B10005B78AE = {
+			isa = PBXGroup;
+			children = (
+				D7D6EE651DA4AFA9005B78AE /* emoji.png */,
+				D7D6EE661DA4AFA9005B78AE /* emoji2.png */,
+				D7D6EE671DA4AFA9005B78AE /* emoji3.png */,
+				D7D6EE681DA4AFA9005B78AE /* en.lproj */,
+				D7D6EE691DA4AFA9005B78AE /* fragment_textured.glsl */,
+				D7D6EE6A1DA4AFA9005B78AE /* fragment.glsl */,
+				D7D6EE6B1DA4AFA9005B78AE /* Images.xcassets */,
+				D7D6EE6C1DA4AFA9005B78AE /* main.cpp */,
+				D7D6EE6D1DA4AFA9005B78AE /* Matrix.cpp */,
+				D7D6EE6E1DA4AFA9005B78AE /* Matrix.h */,
+				D7D6EE6F1DA4AFA9005B78AE /* NYUCodebase-Info.plist */,
+				D7D6EE701DA4AFA9005B78AE /* Pong.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		D7D6EE711DA4AFA9005B78AE /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		D7D6EE511DA48B10005B78AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+			};
+			buildConfigurationList = D7D6EE541DA48B10005B78AE /* Build configuration list for PBXProject "Pong" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D7D6EE501DA48B10005B78AE;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D7D6EE711DA4AFA9005B78AE /* Products */;
+					ProjectRef = D7D6EE701DA4AFA9005B78AE /* Pong.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		D7D6EE551DA48B10005B78AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		D7D6EE561DA48B10005B78AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D7D6EE541DA48B10005B78AE /* Build configuration list for PBXProject "Pong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7D6EE551DA48B10005B78AE /* Debug */,
+				D7D6EE561DA48B10005B78AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7D6EE511DA48B10005B78AE /* Project object */;
+}

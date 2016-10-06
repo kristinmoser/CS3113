@@ -8,22 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		6D5A86AE19AE5C710066C1FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5A86AD19AE5C710066C1FD /* Cocoa.framework */; };
-		6D5A86B819AE5C710066C1FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A86B619AE5C710066C1FD /* InfoPlist.strings */; };
-		6D5A86BA19AE5C710066C1FD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A86B919AE5C710066C1FD /* main.cpp */; };
-		6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A86BC19AE5C710066C1FD /* Credits.rtf */; };
-		6D5A86C619AE5C710066C1FD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A86C519AE5C710066C1FD /* Images.xcassets */; };
 		6D5A86E319AE5CD10066C1FD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5A86E219AE5CD10066C1FD /* SDL2.framework */; };
 		6D5AC2D019AE6280004CB1BF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5AC2CF19AE6280004CB1BF /* OpenGL.framework */; };
 		6D5AC2D219AE6A1E004CB1BF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5AC2D119AE6A1E004CB1BF /* SDL2_image.framework */; };
-		6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6DC707691BA7273500225B7D /* vertex_textured.glsl */; };
-		6DE9D2F11BA6AB8C002D599C /* fragment_textured.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6DE9D2F01BA6AB8C002D599C /* fragment_textured.glsl */; };
-		6DEF23C11B96CC2600BCE792 /* fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6DEF23BB1B96CC2600BCE792 /* fragment.glsl */; };
-		6DEF23C21B96CC2600BCE792 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */; };
-		6DEF23C31B96CC2600BCE792 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */; };
-		6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6DEF23C01B96CC2600BCE792 /* vertex.glsl */; };
-		D777FBB81D98B83900CCB301 /* emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = D777FBB51D98B83900CCB301 /* emoji.png */; };
-		D777FBB91D98B83900CCB301 /* emoji2.png in Resources */ = {isa = PBXBuildFile; fileRef = D777FBB61D98B83900CCB301 /* emoji2.png */; };
-		D777FBBC1D98C53600CCB301 /* emoji3.png in Resources */ = {isa = PBXBuildFile; fileRef = D777FBBB1D98C53600CCB301 /* emoji3.png */; };
+		D7AC03B21DA1F8660050AC77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03B01DA1F8660050AC77 /* InfoPlist.strings */; };
+		D7AC03B61DA1F8990050AC77 /* emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03B31DA1F8990050AC77 /* emoji.png */; };
+		D7AC03B71DA1F8990050AC77 /* emoji2.png in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03B41DA1F8990050AC77 /* emoji2.png */; };
+		D7AC03B81DA1F8990050AC77 /* emoji3.png in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03B51DA1F8990050AC77 /* emoji3.png */; };
+		D7AC03BB1DA1F8A20050AC77 /* fragment_textured.glsl in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03B91DA1F8A20050AC77 /* fragment_textured.glsl */; };
+		D7AC03BC1DA1F8A20050AC77 /* fragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03BA1DA1F8A20050AC77 /* fragment.glsl */; };
+		D7AC03BE1DA1F8A70050AC77 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7AC03BD1DA1F8A70050AC77 /* main.cpp */; };
+		D7AC03C11DA1F8BB0050AC77 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7AC03BF1DA1F8BB0050AC77 /* Matrix.cpp */; };
+		D7AC03C61DA1F8C40050AC77 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7AC03C21DA1F8C40050AC77 /* ShaderProgram.cpp */; };
+		D7AC03C71DA1F8C40050AC77 /* vertex_textured.glsl in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03C41DA1F8C40050AC77 /* vertex_textured.glsl */; };
+		D7AC03C81DA1F8C40050AC77 /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03C51DA1F8C40050AC77 /* vertex.glsl */; };
+		D7AC03CB1DA1F8EA0050AC77 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03C91DA1F8EA0050AC77 /* Credits.rtf */; };
+		D7AC03CF1DA1F9040050AC77 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03CE1DA1F9040050AC77 /* Images.xcassets */; };
+		D7AC03D11DA1F9220050AC77 /* NYUCodebase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7AC03D01DA1F9220050AC77 /* NYUCodebase-Info.plist */; };
+		D7D26DAE1DA56AAA00C10E2C /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D26DAB1DA56AAA00C10E2C /* blue.png */; };
+		D7D26DAF1DA56AAA00C10E2C /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D26DAC1DA56AAA00C10E2C /* purple.png */; };
+		D7D26DB01DA56AAA00C10E2C /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D26DAD1DA56AAA00C10E2C /* yellow.png */; };
+		D7D26DB21DA5A6CE00C10E2C /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7D26DB11DA5A6CE00C10E2C /* background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,27 +37,31 @@
 		6D5A86B019AE5C710066C1FD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6D5A86B119AE5C710066C1FD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6D5A86B219AE5C710066C1FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		6D5A86B519AE5C710066C1FD /* NYUCodebase-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NYUCodebase-Info.plist"; sourceTree = "<group>"; };
-		6D5A86B719AE5C710066C1FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D5A86B919AE5C710066C1FD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		6D5A86BD19AE5C710066C1FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		6D5A86C519AE5C710066C1FD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6D5A86D319AE5C710066C1FD /* NYUCodebaseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NYUCodebaseTests-Info.plist"; sourceTree = "<group>"; };
 		6D5A86D519AE5C710066C1FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D5A86E219AE5CD10066C1FD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		6D5AC2CF19AE6280004CB1BF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6D5AC2D119AE6A1E004CB1BF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
-		6DC707691BA7273500225B7D /* vertex_textured.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex_textured.glsl; sourceTree = "<group>"; };
-		6DE9D2F01BA6AB8C002D599C /* fragment_textured.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_textured.glsl; sourceTree = "<group>"; };
-		6DEF23BB1B96CC2600BCE792 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
-		6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
-		6DEF23BD1B96CC2600BCE792 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
-		6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
-		6DEF23BF1B96CC2600BCE792 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
-		6DEF23C01B96CC2600BCE792 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
-		D777FBB51D98B83900CCB301 /* emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji.png; path = Images/emoji.png; sourceTree = "<group>"; };
-		D777FBB61D98B83900CCB301 /* emoji2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji2.png; path = Images/emoji2.png; sourceTree = "<group>"; };
-		D777FBBB1D98C53600CCB301 /* emoji3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji3.png; sourceTree = "<group>"; };
+		D7AC03B11DA1F8660050AC77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		D7AC03B31DA1F8990050AC77 /* emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji.png; sourceTree = SOURCE_ROOT; };
+		D7AC03B41DA1F8990050AC77 /* emoji2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji2.png; sourceTree = SOURCE_ROOT; };
+		D7AC03B51DA1F8990050AC77 /* emoji3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji3.png; sourceTree = SOURCE_ROOT; };
+		D7AC03B91DA1F8A20050AC77 /* fragment_textured.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_textured.glsl; sourceTree = SOURCE_ROOT; };
+		D7AC03BA1DA1F8A20050AC77 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = SOURCE_ROOT; };
+		D7AC03BD1DA1F8A70050AC77 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		D7AC03BF1DA1F8BB0050AC77 /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = SOURCE_ROOT; };
+		D7AC03C01DA1F8BB0050AC77 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = SOURCE_ROOT; };
+		D7AC03C21DA1F8C40050AC77 /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = SOURCE_ROOT; };
+		D7AC03C31DA1F8C40050AC77 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = SOURCE_ROOT; };
+		D7AC03C41DA1F8C40050AC77 /* vertex_textured.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex_textured.glsl; sourceTree = SOURCE_ROOT; };
+		D7AC03C51DA1F8C40050AC77 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = SOURCE_ROOT; };
+		D7AC03CA1DA1F8EA0050AC77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = SOURCE_ROOT; };
+		D7AC03CE1DA1F9040050AC77 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = SOURCE_ROOT; };
+		D7AC03D01DA1F9220050AC77 /* NYUCodebase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NYUCodebase-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D7D26DAB1DA56AAA00C10E2C /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = SOURCE_ROOT; };
+		D7D26DAC1DA56AAA00C10E2C /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = SOURCE_ROOT; };
+		D7D26DAD1DA56AAA00C10E2C /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = SOURCE_ROOT; };
+		D7D26DB11DA5A6CE00C10E2C /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,10 +131,10 @@
 		6D5A86B419AE5C710066C1FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6D5A86C519AE5C710066C1FD /* Images.xcassets */,
-				6D5A86B519AE5C710066C1FD /* NYUCodebase-Info.plist */,
-				6D5A86B619AE5C710066C1FD /* InfoPlist.strings */,
-				6D5A86BC19AE5C710066C1FD /* Credits.rtf */,
+				D7AC03CE1DA1F9040050AC77 /* Images.xcassets */,
+				D7AC03D01DA1F9220050AC77 /* NYUCodebase-Info.plist */,
+				D7AC03C91DA1F8EA0050AC77 /* Credits.rtf */,
+				D7AC03B01DA1F8660050AC77 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -150,18 +159,22 @@
 		6D5A86E119AE5CAA0066C1FD /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				D777FBBB1D98C53600CCB301 /* emoji3.png */,
-				D777FBB51D98B83900CCB301 /* emoji.png */,
-				D777FBB61D98B83900CCB301 /* emoji2.png */,
-				6DEF23BB1B96CC2600BCE792 /* fragment.glsl */,
-				6DE9D2F01BA6AB8C002D599C /* fragment_textured.glsl */,
-				6DC707691BA7273500225B7D /* vertex_textured.glsl */,
-				6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */,
-				6DEF23BD1B96CC2600BCE792 /* Matrix.h */,
-				6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */,
-				6DEF23BF1B96CC2600BCE792 /* ShaderProgram.h */,
-				6DEF23C01B96CC2600BCE792 /* vertex.glsl */,
-				6D5A86B919AE5C710066C1FD /* main.cpp */,
+				D7AC03C21DA1F8C40050AC77 /* ShaderProgram.cpp */,
+				D7AC03C31DA1F8C40050AC77 /* ShaderProgram.h */,
+				D7D26DAB1DA56AAA00C10E2C /* blue.png */,
+				D7D26DB11DA5A6CE00C10E2C /* background.jpg */,
+				D7D26DAC1DA56AAA00C10E2C /* purple.png */,
+				D7D26DAD1DA56AAA00C10E2C /* yellow.png */,
+				D7AC03C41DA1F8C40050AC77 /* vertex_textured.glsl */,
+				D7AC03C51DA1F8C40050AC77 /* vertex.glsl */,
+				D7AC03B91DA1F8A20050AC77 /* fragment_textured.glsl */,
+				D7AC03BA1DA1F8A20050AC77 /* fragment.glsl */,
+				D7AC03B31DA1F8990050AC77 /* emoji.png */,
+				D7AC03BF1DA1F8BB0050AC77 /* Matrix.cpp */,
+				D7AC03C01DA1F8BB0050AC77 /* Matrix.h */,
+				D7AC03BD1DA1F8A70050AC77 /* main.cpp */,
+				D7AC03B41DA1F8990050AC77 /* emoji2.png */,
+				D7AC03B51DA1F8990050AC77 /* emoji3.png */,
 			);
 			name = Code;
 			sourceTree = "<group>";
@@ -219,16 +232,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D777FBB91D98B83900CCB301 /* emoji2.png in Resources */,
-				D777FBB81D98B83900CCB301 /* emoji.png in Resources */,
-				D777FBBC1D98C53600CCB301 /* emoji3.png in Resources */,
-				6D5A86B819AE5C710066C1FD /* InfoPlist.strings in Resources */,
-				6DEF23C11B96CC2600BCE792 /* fragment.glsl in Resources */,
-				6DE9D2F11BA6AB8C002D599C /* fragment_textured.glsl in Resources */,
-				6D5A86C619AE5C710066C1FD /* Images.xcassets in Resources */,
-				6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */,
-				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
-				6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */,
+				D7AC03B61DA1F8990050AC77 /* emoji.png in Resources */,
+				D7AC03BC1DA1F8A20050AC77 /* fragment.glsl in Resources */,
+				D7AC03C71DA1F8C40050AC77 /* vertex_textured.glsl in Resources */,
+				D7AC03B81DA1F8990050AC77 /* emoji3.png in Resources */,
+				D7AC03CF1DA1F9040050AC77 /* Images.xcassets in Resources */,
+				D7AC03CB1DA1F8EA0050AC77 /* Credits.rtf in Resources */,
+				D7D26DB21DA5A6CE00C10E2C /* background.jpg in Resources */,
+				D7AC03B71DA1F8990050AC77 /* emoji2.png in Resources */,
+				D7AC03BB1DA1F8A20050AC77 /* fragment_textured.glsl in Resources */,
+				D7AC03B21DA1F8660050AC77 /* InfoPlist.strings in Resources */,
+				D7AC03D11DA1F9220050AC77 /* NYUCodebase-Info.plist in Resources */,
+				D7AC03C81DA1F8C40050AC77 /* vertex.glsl in Resources */,
+				D7D26DAF1DA56AAA00C10E2C /* purple.png in Resources */,
+				D7D26DAE1DA56AAA00C10E2C /* blue.png in Resources */,
+				D7D26DB01DA56AAA00C10E2C /* yellow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,37 +257,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DEF23C31B96CC2600BCE792 /* ShaderProgram.cpp in Sources */,
-				6DEF23C21B96CC2600BCE792 /* Matrix.cpp in Sources */,
-				6D5A86BA19AE5C710066C1FD /* main.cpp in Sources */,
+				D7AC03C61DA1F8C40050AC77 /* ShaderProgram.cpp in Sources */,
+				D7AC03C11DA1F8BB0050AC77 /* Matrix.cpp in Sources */,
+				D7AC03BE1DA1F8A70050AC77 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6D5A86B619AE5C710066C1FD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6D5A86B719AE5C710066C1FD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6D5A86BC19AE5C710066C1FD /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6D5A86BD19AE5C710066C1FD /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
 		6D5A86D419AE5C710066C1FD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6D5A86D519AE5C710066C1FD /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D7AC03B01DA1F8660050AC77 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7AC03B11DA1F8660050AC77 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D7AC03C91DA1F8EA0050AC77 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7AC03CA1DA1F8EA0050AC77 /* en */,
+			);
+			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -373,7 +391,7 @@
 					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
 					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
 				);
-				INFOPLIST_FILE = "NYUCodebase/NYUCodebase-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NYUCodebase-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ivansafrin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -397,7 +415,7 @@
 					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
 					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
 				);
-				INFOPLIST_FILE = "NYUCodebase/NYUCodebase-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NYUCodebase-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ivansafrin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
