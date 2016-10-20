@@ -22,7 +22,7 @@ SDL_Window* displayWindow;
 ////-------- GAME STATE & BOOLS -------------
 
 bool done = false;
-enum GameState { STATE_MAIN_MENU, STATE_GAME_LEVEL };
+enum GameState { STATE_MAIN_MENU, STATE_GAME_LEVEL, STATE_GAME_OVER };
 int state = STATE_MAIN_MENU;
 
 
@@ -58,7 +58,9 @@ Matrix modelMatrix;
 Matrix viewMatrix;
 Matrix playerMatrix;
 Matrix doughnutMatrix;
-Matrix vegetableMatrix;
+Matrix carrotMatrix;
+Matrix appleMatrix;
+Matrix lettuceMatrix;
 Matrix titleMatrix;
 Matrix backgroundMatrix;
 
@@ -168,10 +170,15 @@ public:
 
 
 SheetSprite player;
-SheetSprite doughnut;
+SheetSprite apple;
+SheetSprite pepper;
+SheetSprite carrot;
+SheetSprite lettuce;
 std::vector<SheetSprite> doughnuts;
-std::vector<SheetSprite> vegetables;
-
+std::vector<SheetSprite> carrots;
+std::vector<SheetSprite> apples;
+std::vector<SheetSprite> lettuces;
+std::vector<SheetSprite> peppers;
 
 ////------ SETUP ---------
 
@@ -190,6 +197,28 @@ ShaderProgram Setup(){
     background = LoadTexture("background.jpg");
     font = LoadTexture("pixel_font.png");
     sprites = LoadTexture("sprites.png");
+    player = SheetSprite(sprites, playerMatrix, 679.0f/1024.0f, 0.0f, 240.0f/1024.0f, 288.0f/1024.0f, 0.5f);
+    apple = SheetSprite(sprites, appleMatrix, 0.0f/1024.0f, 0.0f/1024.0f, 375.0f/1024.0f, 345.0f/1024.0f, 0.4f);
+    pepper = SheetSprite(sprites, appleMatrix, 377.0f/1024.0f, 0.0f/1024.0f, 300.0f/1024.0f, 330.0f/1024.0f, 0.5f);
+    carrot = SheetSprite(sprites, carrotMatrix, 362.0f/1024.0f, 347.0f/1024.0f, 345.0f/1024.0f, 405.0f/1024.0f, 0.5f);
+    lettuce = SheetSprite(sprites, lettuceMatrix, 0.0f/1024.0f, 347.0f/1024.0f, 360.0f/1024.0f, 375.0f/1024.0f, 0.45f);
+    carrot.y = 2.4f;
+    apple.y = 1.8f;
+    lettuce.y = 1.4f;
+    pepper.y = .95f;
+    for (int i = 0; i < 17; ++i){
+        carrots.push_back(carrot);
+    }
+    for (int j = 0; j < 11; ++j){
+        apples.push_back(apple);
+    }
+    for (int k = 0; k < 14; ++k){
+        lettuces.push_back(lettuce);
+    }
+    for (int l = 0; l < 11; ++l){
+        peppers.push_back(pepper);
+    }
+    player.y = -0.9f;
     projectionMatrix.setOrthoProjection(-3.50, 3.50, -2.0f, 2.0f, -1.0f, 1.0f);
     ShaderProgram program(RESOURCE_FOLDER "vertex_textured.glsl", RESOURCE_FOLDER "fragment_textured.glsl");
     glUseProgram(program.programID);
@@ -255,6 +284,14 @@ void ProcessGame() {
     }
 }
 
+void ProcessGameOver(){
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
+            done = true;
+            
+        }
+    }
+}
 
 void ProcessEvents() {
     // our SDL event loop
@@ -265,6 +302,9 @@ void ProcessEvents() {
             break;
         case STATE_GAME_LEVEL:
             ProcessGame();
+            break;
+        case STATE_GAME_OVER:
+            ProcessGameOver();
             break;
         default:
             break;
@@ -321,7 +361,6 @@ void RenderMainMenu(ShaderProgram program){
     titleMatrix.identity();
     titleMatrix.Translate(-2.5, 0.0, 0.0);
     program.setModelMatrix(titleMatrix);
-    //glTranslatef(-1.0f, 2.0f, 0.0f);
     DrawText(&program, font, "DOUGHNUTS > DIETS", 0.3f, 0.0f);
     titleMatrix.identity();
     titleMatrix.Translate(-1.5, -0.5, 0.0);
@@ -334,7 +373,6 @@ void RenderMainMenu(ShaderProgram program){
 void RenderGameLevel(ShaderProgram program){
     // for all game elements
     // setup transforms, render sprites
-    
     if (moveLeft){
          player.x -= player.velocity * elapsed;
     }
@@ -342,29 +380,65 @@ void RenderGameLevel(ShaderProgram program){
         player.x += player.velocity * elapsed;
     }
     if (spacePress){
-        SheetSprite Adoughnut = SheetSprite(sprites, doughnutMatrix, 0.0f/1024.0f, 724.0f/1024.0f, 345.0f/1024.0f, 270.0f/1024.0f,0.3f);
+        SheetSprite Adoughnut = SheetSprite(sprites, doughnutMatrix, 0.0f/1024.0f, 724.0f/1024.0f, 345.0f/1024.0f, 270.0f/1024.0f,0.2f);
         Adoughnut.x = player.x;
         doughnuts.push_back(Adoughnut);
         spacePress = false;
     }
-    for (int i = 0; i < 15; ++i){
-        SheetSprite apple = SheetSprite(sprites, vegetableMatrix, 0.0f/1024.0f, 0.0f/1024.0f, 375.0f/1024.0f, 345.0f/1024.0f,0.3f);
-        SheetSprite pepper = SheetSprite(sprites, vegetableMatrix, 377.0f/1024.0f, 0.0f/1024.0f, 300.0f/1024.0f, 330.0f/1024.0f,0.3f);
-        
-        
-        
-        SheetSprite carrot = SheetSprite(sprites, vegetableMatrix, 0.0f/1024.0f, 724.0f/1024.0f, 345.0f/1024.0f, 270.0f/1024.0f,0.3f);
-        SheetSprite lettuce = SheetSprite(sprites, vegetableMatrix, 0.0f/1024.0f, 724.0f/1024.0f, 345.0f/1024.0f, 270.0f/1024.0f,0.3f);
-        vegetables[i].Draw(program);
+    std::cout << ticks << std::endl;
+    for (int k = 0; k < carrots.size(); ++k){
+        carrots[k].x = -3.2f + (k * .40f);
+        if (fmod(ticks, 4) > 0 && fmod(ticks, 4) < .02){
+            carrots[k].y -= 0.2f;
+        }
+        carrots[k].Draw(program);
+    }
+    for (int j = 0; j < apples.size(); ++j){
+        apples[j].x = -3.2f + (j * .70f);
+        if (fmod(ticks, 4) > 0 && fmod(ticks, 4) < .02){
+            apples[j].y -= 0.2f;
+        }
+        apples[j].Draw(program);
+    }
+    for (int l = 0; l < lettuces.size(); ++l){
+        lettuces[l].x = -3.2f + (l * .50f);
+        if (fmod(ticks, 4) > 0 && fmod(ticks, 4) < .02){
+            lettuces[l].y -= 0.2f;
+        }
+        lettuces[l].Draw(program);
+    }
+    for (int m = 0; m < peppers.size(); ++m){
+        peppers[m].x = -3.2f + (m * .650f);
+        if (fmod(ticks, 4) > 0 && fmod(ticks, 4) < .02){
+            peppers[m].y -= 0.2f;
+        }
+        peppers[m].Draw(program);
     }
     for (int i = 0; i < doughnuts.size(); ++i){
         doughnuts[i].y += doughnuts[i].velocity * elapsed;
         doughnuts[i].Draw(program);
         //std::cout << Adoughnut.y << " RENDER DONUT Y VALUE" << std::endl;
     }
+
     player.Draw(program);
 
 
+}
+
+void RenderGameOver(ShaderProgram program){
+    backgroundMatrix.identity();
+    program.setModelMatrix(backgroundMatrix);
+    draw(background, fullScreenVertices, program, wholeTexCoords);
+    titleMatrix.identity();
+    titleMatrix.Translate(-2.5, 0.0, 0.0);
+    program.setModelMatrix(titleMatrix);
+    DrawText(&program, font, "GAME OVER", 0.3f, 0.0f);
+    titleMatrix.identity();
+    titleMatrix.Translate(-1.5, -0.5, 0.0);
+    program.setModelMatrix(titleMatrix);
+    //DrawText(&program, font, "SCORE: " + (string)score, 0.15f, 0.0f);
+    glDisableVertexAttribArray(program.positionAttribute);
+    glDisableVertexAttribArray(program.texCoordAttribute);
 }
 void Render(ShaderProgram program) {
     //std::cout << "Entered Render" << "\n";
@@ -379,6 +453,9 @@ void Render(ShaderProgram program) {
             //std::cout << "Enter Game Render" << "\n";
             RenderGameLevel(program);
             break;
+        case STATE_GAME_OVER:
+            RenderGameOver(program);
+            break;
     }
 }
 
@@ -386,22 +463,46 @@ void Render(ShaderProgram program) {
 
 //void UpdateMainMenu(){
     // move stuff and check for collisions
-//}
+//} 
 
 void UpdateGameLevel(){
     // move stuff and check for collisions
     //call .Update() on all entities
     playerMatrix.Translate(player.x, player.y, 0);
     for (int i = 0; i < doughnuts.size(); ++i){
-        doughnuts[i].matrix.Translate(doughnuts[i].x, doughnuts[i].y, 0.0);
-        if (doughnuts[i].y >= 2.0){
-            doughnuts.erase(doughnuts.begin() + i);
+        for (int j = 0; j < carrots.size(); ++j){
+            for (int k = 0; k < apples.size(); ++k){
+                for (int l = 0; l < lettuces.size(); ++l){
+                    for (int m = 0; m < peppers.size(); ++m){
+                        if (doughnuts[i].y < carrots[j].y + carrots[j].height/2 && doughnuts[i].y > carrots[j].y - carrots[j].height/2){
+                            if (doughnuts[i].x < carrots[j].x + carrots[j].width/2 && doughnuts[i].x > carrots[j].x - carrots[j].width/2){
+                                doughnuts.erase(doughnuts.begin() + i);
+                                carrots.erase(carrots.begin() + j);
+                            }
+                        }
+                        if (doughnuts[i].y < apples[k].y + apples[k].height/2 && doughnuts[i].y > apples[k].y - apples[k].height/2){
+                            if (doughnuts[i].x < apples[k].x + apples[k].width/2 && doughnuts[i].x > apples[k].x - apples[k].width/2){
+                                doughnuts.erase(doughnuts.begin() + i);
+                                apples.erase(apples.begin() + k);
+                            }
+                        }
+                        if (doughnuts[i].y < lettuces[l].y + lettuces[l].height/2 && doughnuts[i].y > lettuces[l].y - lettuces[l].height/2){
+                            if (doughnuts[i].x < lettuces[l].x + lettuces[l].width/2 && doughnuts[i].x > lettuces[l].x - lettuces[l].width/2){
+                                doughnuts.erase(doughnuts.begin() + i);
+                                lettuces.erase(lettuces.begin() + l);
+                            }
+                        }
+                        if (doughnuts[i].y < peppers[m].y + peppers[m].height/2 && doughnuts[i].y > peppers[m].y - peppers[m].height/2){
+                            if (doughnuts[i].x < peppers[m].x + peppers[m].width/2 && doughnuts[i].x > peppers[m].x - peppers[m].width/2){
+                                doughnuts.erase(doughnuts.begin() + i);
+                                peppers.erase(peppers.begin() + m);
+                            }
+                         }
+                }
+            }
         }
     }
-    for (int i = 0; i < vegetables.size(); ++i){
-        
     }
-
 }
 
 
@@ -432,8 +533,6 @@ void Cleanup() {
 
 int main() {
     ShaderProgram prog = Setup();
-    player = SheetSprite(sprites, playerMatrix, 679.0f/1024.0f, 0.0f, 240.0f/1024.0f, 288.0f/1024.0f, 0.7f);
-    doughnut = SheetSprite(sprites, doughnutMatrix, 0.0f/1024.0f, 724.0f/1024.0f, 345.0f/1024.0f, 270.0f/1024.0f,0.3f);
     while(!done) {
         ProcessEvents();
         Update();

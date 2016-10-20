@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.cpp"
-            timestampString = "498615072.497016"
+            timestampString = "498638834.304242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "DrawText(ShaderProgram *program, int fontTexture, std::string text, float size, float spacing)"
             landmarkType = "9">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.cpp"
-            timestampString = "498608682.401281"
+            timestampString = "498637565.685518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "Setup()"
             landmarkType = "9">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.cpp"
-            timestampString = "498615072.497016"
+            timestampString = "498638834.304242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271">
+            startingLineNumber = "315"
+            endingLineNumber = "315">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.cpp"
-            timestampString = "498615072.497016"
+            timestampString = "498638834.304242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
             landmarkName = "UpdateGameLevel()"
             landmarkType = "9">
          </BreakpointContent>
