@@ -194,9 +194,14 @@ public:
     Entity(Vector3 pos, Vector3 vel): position(pos), velocity(vel){}
     Vector3 position;
     Vector3 velocity;
+    //Vector3 size
     float gravity = -2.0f;
-    //Vector3 size;
+    float bottom = position.y - (sprite.height/2);
+    float top = position.y + (sprite.height/2);
+    float left = position.x - (sprite.width / 2);
+    float right = position.x + (sprite.width/2);
     float rotation;
+    float friction = -2.0f;
     SheetSprite sprite;
 };
 
@@ -205,6 +210,11 @@ std::vector<Entity> entities;
 Entity player;
 
 ////------ SETUP ---------
+
+void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) {
+    *gridX = (int)(worldX / TILE_SIZE);
+    *gridY = (int)(-worldY / TILE_SIZE);
+}
 
 
 ShaderProgram Setup(){
@@ -488,7 +498,7 @@ void UpdateGameLevel(){
     player.velocity.y += player.gravity * elapsed;
     player.position.y += player.velocity.y * elapsed;
     if (moveLeft || moveRight){
-        player.position.x += player.velocity.x *  elapsed;
+        player.position.x += player.velocity.x * elapsed;
     }
 
     
