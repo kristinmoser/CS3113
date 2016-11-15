@@ -48,7 +48,8 @@ unsigned char levelData[LEVEL_HEIGHT][LEVEL_WIDTH] =
 };
 
 unsigned char solids[] = { 0, 1, 2, 3, 4 , 5, 6, 7, 8, 9, 10, 11, 12, 13,14,15,16, 17, 18, 19, 20, 21, 22, 23, 35, 36, 37, 38, 48, 49, 50, 51};
-
+int mapWidth = 75;
+int mapHeight = 20;
 ////-------- GAME STATE & BOOLS -------------
 
 bool done = false;
@@ -190,16 +191,26 @@ public:
 class Entity{
 public:
     
-    Entity() : position(Vector3(0,0,0)), velocity(Vector3(0,0,0)){}
-    Entity(Vector3 pos, Vector3 vel): position(pos), velocity(vel){}
+    Entity() : position(Vector3(0,0,0)), velocity(Vector3(0,0,0)), acceleration(Vector3(0,0,0)){}
+    Entity(Vector3 pos, Vector3 vel, Vector3 acc): position(pos), velocity(vel), acceleration(acc){}
     Vector3 position;
     Vector3 velocity;
-    //Vector3 size
+    Vector3 acceleration;
     float gravity = -2.0f;
-    float bottom = position.y - (sprite.height/2);
-    float top = position.y + (sprite.height/2);
-    float left = position.x - (sprite.width / 2);
-    float right = position.x + (sprite.width/2);
+    void calcBTLR(){
+        bottom = position.y - (sprite.height/2);
+        top = position.y + (sprite.height/2);
+        left = position.x - (sprite.width / 2);
+        right = position.x + (sprite.width/2);
+    }
+    void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) {
+        *gridX = (int)(worldX / TILE_SIZE);
+        *gridY = (int)(-worldY / TILE_SIZE);
+    }
+    float bottom;
+    float top;
+    float left;
+    float right;
     float rotation;
     float friction = -2.0f;
     SheetSprite sprite;
@@ -211,10 +222,7 @@ Entity player;
 
 ////------ SETUP ---------
 
-void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) {
-    *gridX = (int)(worldX / TILE_SIZE);
-    *gridY = (int)(-worldY / TILE_SIZE);
-}
+
 
 
 ShaderProgram Setup(){
@@ -233,8 +241,10 @@ ShaderProgram Setup(){
     background = LoadTexture("sky.png");
     playerText = LoadTexture("p1_spritesheet.png");
     Vector3 zero = Vector3(0,0,0);
-    player = Entity(zero, zero);
+    player = Entity(zero, zero, zero);
     player.sprite = SheetSprite(playerText, 0/1024.0f, 0/1024.0f, 72/512.0f, 97/512.0f, 0.5);
+    player.position.y = 5.0f;
+    player.calcBTLR();
     entities.push_back(player);
     //tile = SheetSprite(sheet, tileMatrix, 0.0f, (84.0f / 14.0f) / 7.0f, 70.0f/1024.0f, 70.0f/1024.0f, 0.5f);
     projectionMatrix.setOrthoProjection(-3.0, 3.0, -2.0f, 2.0f, -1.0f, 1.0f);
@@ -494,14 +504,26 @@ void Render(ShaderProgram program) {
 // move stuff and check for collisions
 //}
 
+void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) {
+    *gridX = (int)(worldX / TILE_SIZE);
+    *gridY = (int)(-worldY / TILE_SIZE);
+}
+
 void UpdateGameLevel(){
     player.velocity.y += player.gravity * elapsed;
     player.position.y += player.velocity.y * elapsed;
+    player.velocity.x += player.friction * elapsed;
     if (moveLeft || moveRight){
         player.position.x += player.velocity.x * elapsed;
     }
-
-    
+    /*int gridX;
+    int gridY;
+    worldToTileCoordinates(player.position.x + TILE_SIZE / 2, player.position.y, &gridX, &gridY);
+    if (!(gridX < 0 || gridX > mapWidth || gridY < 0 || gridY > mapHeight) && (std::find(std::begin(solids), std::end(solids), levelData[gridY][gridX]) != std::end(solids))){
+        std::cout << "here" << std::endl;
+        player.position.y += -1 * (player.position.y) - gridY * TILE_SIZE + 0.001;
+        player.velocity.y = 0;
+    }*/
     // move stuff and check for collisions
     //call .Update() on all entities
     
