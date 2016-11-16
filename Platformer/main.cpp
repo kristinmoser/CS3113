@@ -12,7 +12,7 @@
 #define LEVEL_WIDTH 75
 #define SPRITE_COUNT_X 14
 #define SPRITE_COUNT_Y 7
-#define TILE_SIZE 450.0f/1024.0f
+#define TILE_SIZE 0.5f
 
 #ifdef _WINDOWS
 #define RESOURCE_FOLDER ""
@@ -212,7 +212,6 @@ public:
     float left;
     float right;
     float rotation;
-    float friction = -2.0f;
     SheetSprite sprite;
 };
 
@@ -512,18 +511,17 @@ void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) 
 void UpdateGameLevel(){
     player.velocity.y += player.gravity * elapsed;
     player.position.y += player.velocity.y * elapsed;
-    player.velocity.x += player.friction * elapsed;
     if (moveLeft || moveRight){
         player.position.x += player.velocity.x * elapsed;
     }
-    /*int gridX;
+    int gridX;
     int gridY;
-    worldToTileCoordinates(player.position.x + TILE_SIZE / 2, player.position.y, &gridX, &gridY);
+    worldToTileCoordinates(player.position.x, player.position.y, &gridX, &gridY);
+    std::cout << "grid before: " << gridX << " " << gridY << std::endl;
     if (!(gridX < 0 || gridX > mapWidth || gridY < 0 || gridY > mapHeight) && (std::find(std::begin(solids), std::end(solids), levelData[gridY][gridX]) != std::end(solids))){
-        std::cout << "here" << std::endl;
-        player.position.y += -1 * (player.position.y) - gridY * TILE_SIZE + 0.001;
+        std::cout << "grid after: " << gridX << " " << gridY << std::endl;
         player.velocity.y = 0;
-    }*/
+    }
     // move stuff and check for collisions
     //call .Update() on all entities
     
