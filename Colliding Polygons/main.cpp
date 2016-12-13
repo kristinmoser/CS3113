@@ -29,19 +29,11 @@ public:
     float x;
     float y;
     void normalize(){
-        float length = sqrtf(x * x + y * y);
-        x /= length;
-        y /= length;
+        float fakeX = x;
+        x = y;
+        y = -fakeX;
     }
 };
-
-Vector modelToWorldCoordinates(const Matrix& modelMatrix, const Vector & modelCoordinates)
-{
-    Vector worldCoordinates;
-    worldCoordinates.x = modelMatrix.m[0][0] * modelCoordinates.x + modelMatrix.m[0][1] * modelCoordinates.y + modelMatrix.m[2][0] * 1.0f + modelMatrix.m[3][0] * 1.0f;
-    worldCoordinates.y = modelMatrix.m[1][0] * modelCoordinates.x + modelMatrix.m[1][1] * modelCoordinates.y + modelMatrix.m[2][1] * 1.0f + modelMatrix.m[3][1] * 1.0f;
-    return worldCoordinates;
-}
 
 
 bool testSATSeparationForEdge(float edgeX, float edgeY, const std::vector<Vector> &points1, const std::vector<Vector> &points2) {
@@ -117,65 +109,88 @@ bool checkSATCollision(const std::vector<Vector> &e1Points, const std::vector<Ve
 }
 
 
+
+
 class Pentagon{
 public:
-    Pentagon(float x) : x(x) {}
+    Pentagon(float x, float xaccel) : x(x), xaccel(xaccel) {}
     float x;
-    float y = 4.0f;
-    float width = 2.0f;
-    float height = 3.0f;
-    float yaccel = -((float) std::rand() / (RAND_MAX)) + 2;
-    float xaccel = -((float) std::rand() / (RAND_MAX)) + 2;
-    float friction = 0.5f;
-    float rotation = 1.0f;
+    float y = 1.0f;
+   // float yaccel = -((float) std::rand() / (RAND_MAX)) + 2;
+    float xaccel;
+   // float friction = 0.5f;
+    //float rotation = 1.0f;
     Matrix modelMatrix;
-    vector<Vector> edges ={
-        Vector(x+width/2.0f, y-height/2.0f),
-        Vector(x-width/2.0f, y+height/2.0f),
-        Vector(x+width/2.0f, y+height/2.0f),
-        Vector(x-width/2.0f, y+height/2.0f)
+    float vertices[30] = {
         
+        0.0f, 0.0f,
+        0.0f, -1.0f,
+        -0.95f, -0.31f,
+        
+        0.0f, 0.0f,
+        -0.95f, -0.31f,
+        -0.59f, 0.81f,
+        
+        0.0f, 0.0f,
+        -0.59f, 0.81f,
+        0.59f, 0.81f,
+        
+        0.0f, 0.0f,
+        0.59f, 0.81f,
+        0.95f, -0.31f,
+        
+        0.0f, 0.0f,
+        0.95f, -0.31f,
+        0.0f, -1.0f
     };
-    void update(ShaderProgram program){
-        if (y - height/2 <= -5.0f){
-            y = -5.0f + height/2;
-            yaccel *= -1;
-        }
-        if (x + width/2 >= 5.0f){
-            x = 5.0f - width/2;
-            xaccel *= -1;
-        }
-        if (x - width/2 <= -5.0f){
-            x = -5.0f + width/2;
-            xaccel *= -1;
-        }
-        if (y + height/2 >= 5.0f){
-            y = 5.0f - height/2;
-            yaccel *= -1;
-        }
-
-        
-    }
     
+    std::vector<Vector> normVertices = {
+        Vector(0.0f, 0.0),
+        Vector(0.0f, -1.0f),
+        Vector(-0.95f, -0.31f),
+        
+        Vector(0.0f, 0.0f),
+        Vector(-0.95f, -0.31f),
+        Vector(-0.59f, 0.81f),
+        
+       Vector( 0.0f, 0.0f),
+        Vector(-0.59f, 0.81f),
+        Vector(0.59f, 0.81f),
+        
+        Vector(0.0f, 0.0f),
+        Vector(0.59f, 0.81f),
+        Vector(0.95f, -0.31f),
+        
+        Vector(0.0f, 0.0f),
+        Vector(0.95f, -0.31f),
+        Vector(0.0f, -1.0f)
+    };
+    
+    float texcoords[30] = {
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        0.95f, 0.31f,
+        
+        0.0f, 0.0f,
+        0.95f, 0.31f,
+        0.59f, 0.81f,
+        
+        0.0f, 0.0f,
+        0.59f, 0.81f,
+        0.59f, 0.81f,
+        
+        0.0f, 0.0f,
+        0.59f, 0.81f,
+        0.95f, 0.31f,
+        
+        0.0f, 0.0f,
+        0.95f, 0.31f,
+        0.0f, 1.0f
+    };
+    
+
     void draw(ShaderProgram program)
     {
-        float vertices[] = {
-            -1.0f, -0.5f,    // A
-            1.0f, -0.5f,    // B
-            0.0f,  0.5f,    // C
-            -1.5f,  0.0f,    // D
-            -1.5f, -1.0f,    // E
-            0.5f, -1.5f,    // F
-            1.0f, -0.5f,
-        };
-        float texcoords[] = {
-            0.0, 1.0,
-            1.0, 1.0,
-            1.0, 0.0,
-            0.0, 1.0,
-            1.0, 0.0,
-            0.0, 0.0
-        };
 
         program.setModelMatrix(modelMatrix);
         glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
@@ -184,7 +199,7 @@ public:
         glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texcoords);
         glEnableVertexAttribArray(program.texCoordAttribute);
         
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
+        glDrawArrays(GL_TRIANGLES, 0, 15);
         glDisableVertexAttribArray(program.positionAttribute);
         glDisableVertexAttribArray(program.texCoordAttribute);
     }
@@ -192,32 +207,32 @@ public:
     
 };
 
-Vector convertToWorldCoords(Matrix transformations, Vector objCoords){
-    Vector worldCoords;
-    worldCoords.x = ((transformations.m[0][0] * objCoords.x) + (transformations.m[1][0] * objCoords.y));
-    worldCoords.y = ((transformations.m[0][1] * objCoords.x) + (transformations.m[1][1] * objCoords.y));
-    return worldCoords;
+void somethingToWorld(const Matrix& modelMatrix, Vector& vec){
+    float x = vec.x;
+    float y = vec.y;
+    vec.x = modelMatrix.m[0][0] * x + modelMatrix.m[0][1] * y + modelMatrix.m[2][0] * 1.0f + modelMatrix.m[3][0] * 1.0f;
+    vec.y = modelMatrix.m[1][0] * x + modelMatrix.m[1][1] * y + modelMatrix.m[2][1] * 1.0f + modelMatrix.m[3][1] * 1.0f;
 }
 
-bool checkCollision(Pentagon pent1, Pentagon pent2){
-    vector<Vector> e1Points;
-    vector<Vector> e2Points;
-    for (int i = 0; i < pent1.edges.size(); ++i){
-        e1Points.push_back(Vector(convertToWorldCoords(pent1.modelMatrix, pent1.edges[i])));
-    }
-    for (int i = 0; i < pent1.edges.size(); ++i){
-        e2Points.push_back(Vector(convertToWorldCoords(pent2.modelMatrix, pent2.edges[i])));
-    }
-    return checkSATCollision(e1Points, e2Points);
-}
 
+bool checkCollision(Pentagon shape1, Pentagon shape2){
+    //call checkSATCollision(const std::vector<Vector> &e1Points, const std::vector<Vector> &e2Points) with
+    //vertices from shape1 and shape2 put into world space
+    for (int i = 0; i < shape1.normVertices.size(); i++){
+            somethingToWorld(modelMatrix, shape1.normVertices[i]);
+    }
+    for (int i = 0; i < shape1.normVertices.size(); i++){
+        somethingToWorld(modelMatrix, (shape2.normVertices[i], shape2.normVertices[i+1]));
+    }
+    return checkSATCollision(shape1.normVertices, shape2.normVertices);
+}
 
 
 
 int main(int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 600, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("colliding pentagons", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 600, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
 #ifdef _WINDOWS
@@ -237,10 +252,9 @@ int main(int argc, char *argv[])
     program.setProjectionMatrix(projectionMatrix);
     program.setViewMatrix(viewMatrix);
 
-    vector<Pentagon> pentagons;
-    for (int i = -2; i < 4; i += 2){
-        pentagons.push_back(*new Pentagon(i));
-    }
+   Pentagon pent1 = Pentagon(3.0, -3.0);
+    Pentagon pent2 = Pentagon(-3.0, 3.0);
+
     while (!done) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
@@ -253,30 +267,36 @@ int main(int argc, char *argv[])
         float ticks = (float) SDL_GetTicks()/1000.0f;
         float elapsed = ticks - lastFrameTicks;
         lastFrameTicks = ticks;
-        int maxChecks = 100;
-        for (int i = 0; i < pentagons.size()-1; ++i){
-            pentagons[i].update(program);
-            while(checkCollision(pentagons[i], pentagons[i+1]) && maxChecks > 0) {
-                Vector responseVector = Vector(pentagons[i].x - pentagons[i + 1].x, pentagons[i].y - pentagons[i +1].y);
-                responseVector.normalize();
-                std::cout << "reached it balh" << std::endl;
-                pentagons[i].x -= responseVector.x * 0.002;
-                pentagons[i].y -= responseVector.y * 0.002;
-                pentagons[i+1].x += responseVector.x * 0.002;
-                pentagons[i+1].y += responseVector.y * 0.002;
-                maxChecks -= 1;
-            }
+        int maxChecks = 10;
+        //for (int i = 0; i < pentagons.size(); ++i){
+           // if(-5.0 < pentagons[i].y < 5.0){
+               pent1.y += -1.0 * elapsed;
+            //}
+            //if (-5.0 < pentagons[i].x < 5.0){
+                pent1.x += pent1.xaccel * elapsed;
+                pent2.x += pent2.xaccel * elapsed;
+            //}
+            //pentagons[i].rotation += elapsed;
+            pent1.modelMatrix.identity();
+            //pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
+            pent1.modelMatrix.Translate(pent1.x, pent1.y, 0);
+            pent1.draw(program);
+            //pentagons[i].rotation += elapsed;
+            pent2.modelMatrix.identity();
+            //pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
+            pent2.modelMatrix.Translate(pent2.x, pent2.y, 0);
+            pent2.draw(program);
+        //}
+        while(checkCollision(pent1, pent2) && maxChecks > 0) {
+            Vector responseVector = Vector(pent1.x - pent2.x, pent1.y - pent2.y);
+            responseVector.normalize();
+            pent1.x -= responseVector.x * 0.0002;
+            pent1.y -= responseVector.y * 0.0002;
+            pent2.x -= responseVector.x * 0.0002;
+            pent2.y -= responseVector.y * 0.0002;
+            maxChecks -= 1;
+//            
         }
-        for (int i = 0; i < pentagons.size(); ++i){
-            pentagons[i].y += pentagons[i].yaccel * elapsed;
-            pentagons[i].x += pentagons[i].xaccel * elapsed;
-            pentagons[i].rotation += elapsed;
-            pentagons[i].modelMatrix.identity();
-            pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
-            pentagons[i].modelMatrix.Translate(pentagons[i].x, pentagons[i].y, 0);
-            pentagons[i].draw(program);
-        }
-
 
         SDL_GL_SwapWindow(displayWindow);
     }
