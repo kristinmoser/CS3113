@@ -61,12 +61,12 @@ bool testSATSeparationForEdge(float edgeX, float edgeY, const std::vector<Vector
     float e2Min = e2Projected[0];
     float e2Max = e2Projected[e2Projected.size()-1];
     float e1Width = fabs(e1Max-e1Min);
+
     float e2Width = fabs(e2Max-e2Min);
     float e1Center = e1Min + (e1Width/2.0);
     float e2Center = e2Min + (e2Width/2.0);
     float dist = fabs(e1Center-e2Center);
     float p = dist - ((e1Width+e2Width)/2.0);
-    
     if(p < 0) {
         return true;
     }
@@ -207,24 +207,60 @@ public:
     
 };
 
-void somethingToWorld(const Matrix& modelMatrix, Vector& vec){
+Vector somethingToWorld(const Matrix& modelMatrix, Vector& vec){
     float x = vec.x;
     float y = vec.y;
-    vec.x = modelMatrix.m[0][0] * x + modelMatrix.m[0][1] * y + modelMatrix.m[2][0] * 1.0f + modelMatrix.m[3][0] * 1.0f;
-    vec.y = modelMatrix.m[1][0] * x + modelMatrix.m[1][1] * y + modelMatrix.m[2][1] * 1.0f + modelMatrix.m[3][1] * 1.0f;
+    x = modelMatrix.m[0][0] * vec.x + modelMatrix.m[0][1] * vec.y + modelMatrix.m[2][0] * 1.0f + modelMatrix.m[3][0] * 1.0f;
+    y = modelMatrix.m[1][0] * vec.x + modelMatrix.m[1][1] * vec.y + modelMatrix.m[2][1] * 1.0f + modelMatrix.m[3][1] * 1.0f;
+    return Vector(x,y);
 }
 
 
 bool checkCollision(Pentagon shape1, Pentagon shape2){
     //call checkSATCollision(const std::vector<Vector> &e1Points, const std::vector<Vector> &e2Points) with
     //vertices from shape1 and shape2 put into world space
+    vector<Vector> edges1;
+    vector<Vector> edges2;
+    std::vector<Vector> reset = {
+        Vector(0.0f, 0.0),
+        Vector(0.0f, -1.0f),
+        Vector(-0.95f, -0.31f),
+        
+        Vector(0.0f, 0.0f),
+        Vector(-0.95f, -0.31f),
+        Vector(-0.59f, 0.81f),
+        
+        Vector( 0.0f, 0.0f),
+        Vector(-0.59f, 0.81f),
+        Vector(0.59f, 0.81f),
+        
+        Vector(0.0f, 0.0f),
+        Vector(0.59f, 0.81f),
+        Vector(0.95f, -0.31f),
+        
+        Vector(0.0f, 0.0f),
+        Vector(0.95f, -0.31f),
+        Vector(0.0f, -1.0f)
+    };
+//    shape1.normVertices = reset;
+//    shape2.normVertices = reset;
+//    for (int i = 0; i < shape1.normVertices.size(); i++){
+//        shape1.normVertices[i].x += shape1.x;
+//        shape1.normVertices[i].y += shape1.y;
+//    }
+//    for (int i = 0; i < shape2.normVertices.size(); i++){
+//        shape2.normVertices[i].x += shape2.x;
+//        shape2.normVertices[i].y += shape2.y;
+//    }
+//    
+    
     for (int i = 0; i < shape1.normVertices.size(); i++){
-            somethingToWorld(modelMatrix, shape1.normVertices[i]);
+           edges1.push_back(somethingToWorld(modelMatrix, shape1.normVertices[i]));
     }
-    for (int i = 0; i < shape1.normVertices.size(); i++){
-        somethingToWorld(modelMatrix, (shape2.normVertices[i], shape2.normVertices[i+1]));
+    for (int i = 0; i < shape2.normVertices.size(); i++){
+        edges2.push_back(somethingToWorld(modelMatrix, shape2.normVertices[i]));
     }
-    return checkSATCollision(shape1.normVertices, shape2.normVertices);
+    return checkSATCollision(edges1, edges2);
 }
 
 
@@ -245,14 +281,14 @@ int main(int argc, char *argv[])
     glViewport(0, 0, 700, 600);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
+
     ShaderProgram program(RESOURCE_FOLDER "vertex.glsl", RESOURCE_FOLDER "fragment.glsl");
     projectionMatrix.setOrthoProjection(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
     glUseProgram(program.programID);
     program.setProjectionMatrix(projectionMatrix);
     program.setViewMatrix(viewMatrix);
 
-   Pentagon pent1 = Pentagon(3.0, -3.0);
+    Pentagon pent1 = Pentagon(3.0, -3.0);
     Pentagon pent2 = Pentagon(-3.0, 3.0);
 
     while (!done) {
@@ -263,14 +299,26 @@ int main(int argc, char *argv[])
         }
     
         glClear(GL_COLOR_BUFFER_BIT);
+
         
         float ticks = (float) SDL_GetTicks()/1000.0f;
         float elapsed = ticks - lastFrameTicks;
         lastFrameTicks = ticks;
         int maxChecks = 10;
+        while(checkCollision(pent1, pent2) && maxChecks > 0) {
+            Vector responseVector = Vector(pent1.x - pent2.x, pent1.y - pent2.y);
+            responseVector.normalize();
+            std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
+            pent1.x -= responseVector.x * 0.0002;
+            pent1.y -= responseVector.y * 0.0002;
+            pent2.x -= responseVector.x * 0.0002;
+            pent2.y -= responseVector.y * 0.0002;
+            maxChecks -= 1;
+            //
+        }
         //for (int i = 0; i < pentagons.size(); ++i){
            // if(-5.0 < pentagons[i].y < 5.0){
-               pent1.y += -1.0 * elapsed;
+               //pent1.y += -1.0 * elapsed;
             //}
             //if (-5.0 < pentagons[i].x < 5.0){
                 pent1.x += pent1.xaccel * elapsed;
@@ -280,23 +328,41 @@ int main(int argc, char *argv[])
             pent1.modelMatrix.identity();
             //pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
             pent1.modelMatrix.Translate(pent1.x, pent1.y, 0);
+
             pent1.draw(program);
             //pentagons[i].rotation += elapsed;
             pent2.modelMatrix.identity();
             //pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
             pent2.modelMatrix.Translate(pent2.x, pent2.y, 0);
+
             pent2.draw(program);
+        
         //}
-        while(checkCollision(pent1, pent2) && maxChecks > 0) {
-            Vector responseVector = Vector(pent1.x - pent2.x, pent1.y - pent2.y);
-            responseVector.normalize();
-            pent1.x -= responseVector.x * 0.0002;
-            pent1.y -= responseVector.y * 0.0002;
-            pent2.x -= responseVector.x * 0.0002;
-            pent2.y -= responseVector.y * 0.0002;
-            maxChecks -= 1;
-//            
-        }
+
+//        maxChecks = 10;
+//        while(checkCollision(pent1, pent3) && maxChecks > 0) {
+//            Vector responseVector = Vector(pent1.x - pent3.x, pent1.y - pent3.y);
+//            responseVector.normalize();
+//            std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
+//            pent1.x -= responseVector.x * 0.0002;
+//            pent1.y -= responseVector.y * 0.0002;
+//            pent3.x -= responseVector.x * 0.0002;
+//            pent3.y -= responseVector.y * 0.0002;
+//            maxChecks -= 1;
+//            //
+//        }
+//        maxChecks = 10;
+//        while(checkCollision(pent3, pent2) && maxChecks > 0) {
+//            Vector responseVector = Vector(pent3.x - pent2.x, pent3.y - pent2.y);
+//            responseVector.normalize();
+//            std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
+//            pent3.x -= responseVector.x * 0.0002;
+//            pent3.y -= responseVector.y * 0.0002;
+//            pent2.x -= responseVector.x * 0.0002;
+//            pent2.y -= responseVector.y * 0.0002;
+//            maxChecks -= 1;
+//            //
+//        }
 
         SDL_GL_SwapWindow(displayWindow);
     }
