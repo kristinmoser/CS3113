@@ -242,17 +242,7 @@ bool checkCollision(Pentagon shape1, Pentagon shape2){
         Vector(0.95f, -0.31f),
         Vector(0.0f, -1.0f)
     };
-//    shape1.normVertices = reset;
-//    shape2.normVertices = reset;
-//    for (int i = 0; i < shape1.normVertices.size(); i++){
-//        shape1.normVertices[i].x += shape1.x;
-//        shape1.normVertices[i].y += shape1.y;
-//    }
-//    for (int i = 0; i < shape2.normVertices.size(); i++){
-//        shape2.normVertices[i].x += shape2.x;
-//        shape2.normVertices[i].y += shape2.y;
-//    }
-//    
+
     
     for (int i = 0; i < shape1.normVertices.size(); i++){
            edges1.push_back(somethingToWorld(modelMatrix, shape1.normVertices[i]));
@@ -290,11 +280,17 @@ int main(int argc, char *argv[])
 
     Pentagon pent1 = Pentagon(3.0, -3.0);
     Pentagon pent2 = Pentagon(-3.0, 3.0);
-
+    Pentagon pent3 = Pentagon(0.0, 3.0);
+    float mouseX = 0.0f;
+    float mouseY = 0.0f;
     while (!done) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
                 done = true;
+            }
+            if (event.type == SDL_MOUSEMOTION){
+                mouseX = event.motion.xrel;
+                mouseY = event.motion.yrel;
             }
         }
     
@@ -316,11 +312,32 @@ int main(int argc, char *argv[])
             maxChecks -= 1;
             //
         }
-        //for (int i = 0; i < pentagons.size(); ++i){
-           // if(-5.0 < pentagons[i].y < 5.0){
-               //pent1.y += -1.0 * elapsed;
-            //}
-            //if (-5.0 < pentagons[i].x < 5.0){
+        
+                maxChecks = 10;
+                while(checkCollision(pent1, pent3) && maxChecks > 0) {
+                    Vector responseVector = Vector(pent1.x - pent3.x, pent1.y - pent3.y);
+                    responseVector.normalize();
+                    std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
+                    pent1.x -= responseVector.x * 0.0002;
+                    pent1.y -= responseVector.y * 0.0002;
+                    pent3.x -= responseVector.x * 0.0002;
+                    pent3.y -= responseVector.y * 0.0002;
+                    maxChecks -= 1;
+                    //
+                }
+                maxChecks = 10;
+                while(checkCollision(pent2, pent3) && maxChecks > 0) {
+                    Vector responseVector = Vector(pent3.x - pent2.x, pent3.y - pent2.y);
+                    responseVector.normalize();
+                    std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
+                    pent3.x -= responseVector.x * 0.0002;
+                    pent3.y -= responseVector.y * 0.0002;
+                    pent2.x -= responseVector.x * 0.0002;
+                    pent2.y -= responseVector.y * 0.0002;
+                    maxChecks -= 1;
+                    //
+                }
+
                 pent1.x += pent1.xaccel * elapsed;
                 pent2.x += pent2.xaccel * elapsed;
             //}
@@ -330,6 +347,11 @@ int main(int argc, char *argv[])
             pent1.modelMatrix.Translate(pent1.x, pent1.y, 0);
 
             pent1.draw(program);
+        pent3.modelMatrix.identity();
+        //pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
+        pent3.modelMatrix.Translate(pent3.x, pent3.y, 0);
+        
+        pent3.draw(program);
             //pentagons[i].rotation += elapsed;
             pent2.modelMatrix.identity();
             //pentagons[i].modelMatrix.Rotate(pentagons[i].rotation);
@@ -339,30 +361,6 @@ int main(int argc, char *argv[])
         
         //}
 
-//        maxChecks = 10;
-//        while(checkCollision(pent1, pent3) && maxChecks > 0) {
-//            Vector responseVector = Vector(pent1.x - pent3.x, pent1.y - pent3.y);
-//            responseVector.normalize();
-//            std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
-//            pent1.x -= responseVector.x * 0.0002;
-//            pent1.y -= responseVector.y * 0.0002;
-//            pent3.x -= responseVector.x * 0.0002;
-//            pent3.y -= responseVector.y * 0.0002;
-//            maxChecks -= 1;
-//            //
-//        }
-//        maxChecks = 10;
-//        while(checkCollision(pent3, pent2) && maxChecks > 0) {
-//            Vector responseVector = Vector(pent3.x - pent2.x, pent3.y - pent2.y);
-//            responseVector.normalize();
-//            std::cout << "x: " << responseVector.x << " y: " << responseVector.y << endl;
-//            pent3.x -= responseVector.x * 0.0002;
-//            pent3.y -= responseVector.y * 0.0002;
-//            pent2.x -= responseVector.x * 0.0002;
-//            pent2.y -= responseVector.y * 0.0002;
-//            maxChecks -= 1;
-//            //
-//        }
 
         SDL_GL_SwapWindow(displayWindow);
     }
